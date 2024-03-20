@@ -7,9 +7,9 @@
       <!-- 模型选择下拉菜单 -->
       <select class="form-select mt-3" v-model="selectedModel">
         <option disabled value="">请选择一个模型</option>
-        <option value="model1">模型1号</option>
-        <option value="model2">模型2号</option>
-        <option value="model3">模型3号</option>
+        <option value="model1">逻辑回归模型</option>
+        <option value="model2">随机森林模型</option>
+        <option value="model3">XGBoost模型</option>
       </select>
       
       <div class="container d-flex flex-column justify-content-center align-items-center" style="margin-top: 20px;">
@@ -53,7 +53,7 @@ export default {
       formData.append("model", this.selectedModel); // 将选中的模型添加到表单数据中
 
       try {
-        const response = await axios.post('http://localhost:8000/upload/', formData, {
+        const response = await axios.post('http://localhost:8000/fileupload/upload/', formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },

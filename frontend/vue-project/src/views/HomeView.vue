@@ -31,6 +31,23 @@ onMounted(() => {
       <div class="tech-card" data-aos="fade-up" data-aos-delay="700">随机森林算法</div>
       <!-- 添加更多技术卡片 -->
     </div>
+     <!-- 技术卡片 -->
+     <div class="tech-cards" data-aos="fade-up" data-aos-delay="400">
+      <!-- 示例技术卡片 -->
+      <div class="tech-card">JavaScript</div>
+      <div class="tech-card" data-aos="fade-up" data-aos-delay="500">css</div>
+      <div class="tech-card" data-aos="fade-up" data-aos-delay="600">逻辑回归</div>
+      <div class="tech-card" data-aos="fade-up" data-aos-delay="700">des加密</div>
+      <!-- 添加更多技术卡片 -->
+    </div>
+    <div class="tech-cards" data-aos="fade-up" data-aos-delay="400">
+      <!-- 示例技术卡片 -->
+      <div class="tech-card">HTML</div>
+      <div class="tech-card" data-aos="fade-up" data-aos-delay="500">AOS</div>
+      <div class="tech-card" data-aos="fade-up" data-aos-delay="600">bootstrap</div>
+      <div class="tech-card" data-aos="fade-up" data-aos-delay="700">Nodejs</div>
+      <!-- 添加更多技术卡片 -->
+    </div>
   </div>
   </main>
 </template>
