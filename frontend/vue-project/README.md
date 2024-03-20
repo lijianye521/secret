@@ -1,10 +1,8 @@
 # vue-project前端
 
-This template should help get you started developing with Vue 3 in Vite.
+
 
 安装nodejs 20版本
-
-
 
 依次运行下面的命令
 
@@ -20,4 +18,8 @@ npm install
 npm run dev
 ```
 
-### 
+3.19完成前端技术展示代码
+
+
+
+3.20完成后端技术展示代码

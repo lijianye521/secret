@@ -31,7 +31,13 @@ const router = createRouter({
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: () => import('../views/FrontendImplementation.vue')
-    }
+    },
+    {
+      path: '/detail/:tech',
+      name: 'TechDetail',
+      component: () => import('../views/TechDetail.vue'),
+      props: true, // 允许我们将路由参数作为props传递给TechDetail组件
+    },
     
   ]
 })
