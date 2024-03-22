@@ -77,7 +77,7 @@ def random_forest(file_path):
 
     # 选择最佳阈值
     best_threshold = thresholds[np.argmax([auc + f1 for auc, f1 in performance])]
-    print(best_threshold)
+
 
     # 使用最佳阈值重新筛选决策树
     selected_trees = [tree for tree, auc_score in zip(trees, auc_scores) if auc_score > best_threshold]
@@ -100,12 +100,13 @@ def random_forest(file_path):
 
     # 使用改进的随机森林模型进行预测
     y_pred_proba = improved_rf.predict_proba(X_test)[:, 1]
-    
-    return y_pred_proba, y_test
+    y_pred_labels = (y_pred_proba >= 0.5).astype(int)
+    return y_pred_labels, y_test, y_pred_proba
+
+
+
+
+
+
     
 
-# # 计算改进模型的AUC值和F1分数
-# test_auc = roc_auc_score(y_test, y_pred_proba)
-# test_f1 = f1_score(y_test, improved_rf.predict(X_test))
-# print(f"Test AUC: {test_auc}")
-# print(f"Test F1 Score: {test_f1}")

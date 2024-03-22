@@ -10,11 +10,9 @@ import numpy as np
 import matplotlib.font_manager as fm
 import argparse
 
-def sigmoid(inX):
-    # 设置一个阈值，超过这个值后就按饱和处理
+def sigmoid(x):
     threshold = 20.0
-    # 将输入限制在 [-threshold, threshold] 范围内
-    inX_clipped = np.clip(inX, -threshold, threshold)
+    inX_clipped = np.clip(x, -threshold, threshold)
     return 1.0 / (1.0 + np.exp(-inX_clipped))
 
 def stocGradAscent1(dataMatrix, classLabels, batchSize=32, numIter=200, lambda_reg=0.01):
@@ -52,22 +50,27 @@ def classifyVector(inX, weights):
 
 def colicTest(train_file_path):
     _, _, x_test, y_test = preprocess_data(train_file_path)
-    trainWeights = np.load('trainWeights_0.2.npy')
+    trainWeights = np.load('training_weights/trainWeights_0.2.npy')
     predictions = []
+    predicted_score = []
 
     for i in range(len(x_test)):
         predicted_label = int(classifyVector(np.array(x_test[i]), trainWeights))
+        #仅仅获得概率不转化成0或者1
+        score =   sigmoid(np.dot(x_test[i], trainWeights))
         predictions.append(predicted_label)
-    return predictions, y_test
+        predicted_score.append(score)
+        
+    
+    return predictions, y_test, predicted_score
 
 
     
-def Test_write_back(test_file_path):
-    # 加载训练得到的权重
-    trainWeights = np.load('trainWeights_0.2.npy')
+def Test_write_back(test_file_path,key):#
+    trainWeights = np.load('training_weights/trainWeights_0.2.npy')
     
     test_data = pd.read_csv(test_file_path, engine="python", encoding="gbk")
-    x_test = test_data.iloc[:, :-1].fillna(0).values
+    x_test = test_data.fillna(0).values
     
 
     scaler = StandardScaler()
@@ -80,31 +83,36 @@ def Test_write_back(test_file_path):
         predictions.append(predicted_label)
 
     test_data['pred_result'] = predictions
-    
-    # 保存更改后的数据框为新的CSV文件
-    new_file_path = test_file_path.replace('.csv', '_with_predictions2.csv')
+    #新文件名原来的路径结尾加上encrypt
+    new_file_path = test_file_path.split(".")[0] + "_encrypt.csv"
     test_data.to_csv(new_file_path, index=False, encoding="gbk")
-    encrypt_csv_column(new_file_path)
+    encrypt_csv_column(new_file_path,key)
 
-def decode_data(test_file_path):
-    decrypt_csv_column(test_file_path)
+def decrypt_data(test_file_path,key):
+    
+    test_data = pd.read_csv(test_file_path, engine="python", encoding="gbk")
+    new_file_path = test_file_path.split(".")[0] + "_to_encrypt.csv"
+    test_data.to_csv(new_file_path, index=False, encoding="gbk")
+    
+    decrypt_csv_column(new_file_path,key)
 
 if __name__ == '__main__':
     argsparser = argparse.ArgumentParser()
     
-    argsparser.add_argument('--train_file_path', type=str, default='/home/xyj/Downloads/code/1/input/internet_service_churn.csv',
+    argsparser.add_argument('--train_file_path', type=str, default='input/internet_service_churn.csv',
                         help='Training set path')
-    argsparser.add_argument('--test_file_path', type=str, default='/home/xyj/Downloads/code/1/input_test/churn_test.csv',
+    argsparser.add_argument('--test_file_path', type=str, default='input_test/churn_test.csv',
                         help='Testing set path')
-    
+    argsparser.add_argument('--encrypt_file_path', type=str, default='input_test/churn_test_encrypt.csv',
+                        help='Testing set path')
     argsparser.add_argument(
-        "--encode_data",
+        "--encrypt_data",
         "-ed",
         action="store_true",
-        help="encode data"
+        help="encrypt data"
     )
     argsparser.add_argument(
-        "--decode_data",
+        "--decrypt_data",
         "-dd",
         action="store_true",
         help="decode data file",
@@ -112,11 +120,11 @@ if __name__ == '__main__':
     
     args = argsparser.parse_args()
         
-    if args.encode_data:
+    if args.encrypt_data:
         Test_write_back(args.test_file_path)
         exit()
-    if args.decode_data:
-        decode_data(args.test_file_path)
+    if args.decrypt_data:
+        decrypt_data(args.encrypt_file_path)
         exit()
         
     colicTest(args.train_file_path)

@@ -3,18 +3,18 @@
       <nav aria-label="breadcrumb"style="margin-top: 180px;" >
         <ol class="breadcrumb">
           <li class="breadcrumb-item" ><router-link to="/frontend-implementation">回退</router-link></li>
-          <li class="breadcrumb-item active" aria-current="page">{{ techDetail.subtitle || 'Detail' }}</li>
+          <li class="breadcrumb-item active" aria-current="page">{{ techDetail2.subtitle || 'Detail' }}</li>
         </ol>
       </nav>
       <div class="row">
         <div class="col-md-6">
-          <img :src="techDetail.imgSrc" class="img-fluid" :alt="techDetail.title" />
+          <img :src="techDetail2.imgSrc" class="img-fluid" :alt="techDetail2.title" />
         </div>
         <div class="col-md-6">
-          <h2>{{ techDetail.subtitle }}</h2>
-          <p>{{ techDetail.description }}</p>
+          <h2>{{ techDetail2.subtitle }}</h2>
+          <p>{{ techDetail2.description }}</p>
           <!-- 如果需要"Learn More"按钮，确保链接是有效的 -->
-          <!-- <router-link :to="techDetail.detailLink" class="btn btn-primary">Learn More</router-link> -->
+          <!-- <router-link :to="techDetail2.detailLink" class="btn btn-primary">Learn More</router-link> -->
         </div>
       </div>
     </div>
@@ -26,8 +26,8 @@
 
   export default {
     setup() {
-      const route = useRoute();
-      const portfolioItems =[
+      const route2 = useRoute();
+      const portfolioItems2 =[
   {
     "title": "前端",
     "subtitle": "HTML介绍",
@@ -87,14 +87,14 @@
 ];
 
   
-      const techDetail = computed(() => {
-        const techId = route.path.match(/\/detail\/(.+?)\/?$/)[1];
+      const techDetail2 = computed(() => {
+        const techId = route2.path.match(/\/detail\/(.+?)\/?$/)[1];
         console.log(techId);
-        const path = route.path;
-        return portfolioItems.find(item => item.detailLink.endsWith(`/${techId}/`)) || { title: '', subtitle: '', imgSrc: '' };
+        const path2 = route2.path;
+        return portfolioItems2.find(item => item.detailLink.endsWith(`/${techId}/`)) || { title: '', subtitle: '', imgSrc: '' };
       });
   
-      return { techDetail };
+      return { techDetail2 };
     }
   };
   </script>

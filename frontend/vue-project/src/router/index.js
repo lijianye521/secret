@@ -42,7 +42,7 @@ const router = createRouter({
     },
     {
       path: '/detail/:tech',
-      name: 'TechDetail',
+      name: 'TechDetail2',
       component: () => import('../views/TechDetail.vue'),
       props: true, // 允许我们将路由参数作为props传递给TechDetail组件
     },

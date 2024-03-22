@@ -15,7 +15,7 @@ from sklearn.metrics import classification_report
 plt.rcParams['font.sans-serif']=['SimHei']##中文乱码问题！
 plt.rcParams['axes.unicode_minus']=False#横坐标负号显示问题！
 
-data=pd.read_csv("./input/internet_service_churn.csv",engine="python",encoding="gbk")
+data=pd.read_csv("input/internet_service_churn.csv",engine="python",encoding="gbk")
 
 #客户流失情况
 data_label = data.groupby("churn").size()

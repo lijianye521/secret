@@ -60,9 +60,9 @@ def xgboost(file_path):
     preds = bst.predict(dtest)
 
     # 将预测结果转换为0和1的标签  
-    preds = [1 if pred >= 0.5 else 0 for pred in preds]
+    y_pred_labels = [1 if pred >= 0.5 else 0 for pred in preds]
     
-    return preds,y_test
+    return y_pred_labels, y_test, preds
     
 
 # # 计算准确率  

@@ -1,5 +1,9 @@
 # 毕业设计
 
+> 本程序前端使用的是vue框架，运行在5173端口，后端是django框架，运行在8000端口，请调试好防火墙来做下面程序的验证。
+
+## 后端设计
+
 为了更好的维护代码，本项目采用前后端分离，前端使用vue脚手架搭建应用，后端使用django框架搭建各类应用服务。
 
 python 版本 Python 3.10.13 
@@ -36,7 +40,54 @@ conda env create -f environment.yml
 1. **激活新环境**：环境创建完成后，你可以通过以下命令来激活这个环境：
 
 ```shell
-conda activate myenv
+conda activate django5
 ```
 
 请将`myenv`替换为你的环境名称，如果你在`environment.yml`文件中使用了不同的名称，或者你在创建环境时指定了一个不同的名称。
+
+
+
+## 前端部分
+
+# vue-project前端
+
+安装环境
+
+https://nodejs.org/dist/v20.11.1/node-v20.11.1-x64.msi
+
+运行node -v命令显示版本信息说明安装成功。
+
+```shell
+C:\Users\Administrator>node -v
+v20.11.1
+```
+
+点击这个链接安装nodejs 20版本的windows版本  另外
+
+依次运行下面的命令
+
+## 工程 Setup
+
+```sh
+npm install
+```
+
+### 运行程序
+
+```sh
+npm run dev
+```
+
+
+
+# 日志
+
+3.19完成前端技术展示代码
+
+
+
+3.20完成后端技术展示代码
+
+3.21解决跨域问题。
+
+3.22完成前后端对接。
