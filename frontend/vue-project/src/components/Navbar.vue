@@ -25,10 +25,10 @@ const navigateTo = (path) => {
     <a  :class="route.path === '/' ? 'navlinkActive' : 'nav-link'" href="#" @click.prevent="navigateTo('/')">首页</a>
   </li>
   <li class="nav-item">
-    <a  :class="route.path === '/model-introduction' ? 'navlinkActive' : 'nav-link'" href="#" @click.prevent="navigateTo('/model-introduction')">模型简介</a>
+    <a  :class="route.path === '/model-introduction' ? 'navlinkActive' : 'nav-link'" href="#" @click.prevent="navigateTo('/model-introduction')">模型评估图展示</a>
   </li>
   <li class="nav-item">
-    <a :class="route.path === '/services' ? 'navlinkActive' : 'nav-link'" href="#" @click.prevent="navigateTo('/services')">提供服务</a>
+    <a :class="route.path === '/services' ? 'navlinkActive' : 'nav-link'" href="#" @click.prevent="navigateTo('/services')">上传服务</a>
   </li>
   <li class="nav-item">
     <a :class="route.path === '/frontend-implementation' ? 'navlinkActive' : 'nav-link'" href="#" @click.prevent="navigateTo('/frontend-implementation')">前端技术实现</a>
@@ -36,6 +36,7 @@ const navigateTo = (path) => {
   <li class="nav-item">
     <a  :class="route.path === '/backend-implementation' ? 'navlinkActive' : 'nav-link'" href="#" @click.prevent="navigateTo('/backend-implementation')">后端技术实现</a>
   </li>
+
 </ul>
 
     </div>

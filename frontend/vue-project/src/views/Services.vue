@@ -17,15 +17,21 @@
       </div>
   
       <div v-if="uploadSuccess" class="alert alert-success" style="margin-top: 20px;">
-        <button class="btn btn-primary" @click="handlePredictModel">模型预测</button>
-      </div>
-      <div class="container d-flex flex-column justify-content-center align-items-center" style="margin-top: 20px;">
+      <button class="btn btn-primary" @click="handlePredictModel" :disabled="predicting">
+        模型预测
+      </button>
+    </div>
+    
+    <div v-if="predicting" class="progress" style="margin-top: 20px;">
+      <div class="progress-bar" role="progressbar" :style="{ width: predictPercentage + '%' }" aria-valuenow="predictPercentage" aria-valuemin="0" aria-valuemax="100">{{ remainingTime }}s</div>
+    </div>
 
-      <!-- CSV Viewer Component -->
+    <!-- CSV Viewer Component -->
+    <div class="container d-flex flex-column justify-content-center align-items-center" style="margin-top: 20px;">
       <CsvViewer :file="selectedFile"></CsvViewer>
-      </div>
     </div>
   </div>
+</div>
 </template>
 
 <script>
@@ -40,7 +46,10 @@ export default {
     return {
       uploadPercentage: 0,
       uploadSuccess: false,
-      selectedFile: null, // Store selected file
+      selectedFile: null,
+      predicting: false, // 是否正在进行模型预测
+      predictPercentage: 0, // 模型预测进度百分比
+      remainingTime: 100, // 倒计时剩余时间
     };
   },
   methods: {
@@ -77,7 +86,7 @@ export default {
 
 async handlePredictModel() {
   try {
-    console.log("预测开始  大概要占用半分钟时间")
+    console.log("预测开始  大概要占用96s时间")
     const response = await predictModel(); // 调用时不传递 data
     console.log('Prediction response:', response);
     // 处理响应数据
@@ -86,6 +95,36 @@ async handlePredictModel() {
     // 处理错误
   }
 },
+
+async handlePredictModel() {
+      this.predicting = true;
+      this.predictPercentage = 0;
+      this.remainingTime = 100;
+
+      const intervalId = setInterval(() => {
+        if (this.remainingTime > 0) {
+          this.remainingTime -= 1;
+          this.predictPercentage = (1 - this.remainingTime / 100) * 100;
+        } else {
+          clearInterval(intervalId);
+          this.predicting = false;
+        }
+      }, 1000);
+
+      try {
+        console.log("预测开始  大概要占用100s时间")
+        const response = await predictModel(); // 调用时不传递 data
+        console.log('Prediction response:', response);
+        // 处理响应数据
+      } catch (error) {
+        console.error(error.message);
+        // 处理错误
+      } finally {
+        this.predicting = false; // 确保预测状态被重置
+        clearInterval(intervalId); // 清除计时器
+      }
+    },
+  
 
 },
 };

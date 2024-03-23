@@ -7,7 +7,7 @@ from rest_framework import status
 
 
 # 你的目标文件夹
-save_dir = 'files'
+save_dir = './prediction_service/model/input'
 
 # 检查目标文件夹是否存在，如果不存在则创建
 if not os.path.exists(save_dir):
@@ -24,7 +24,7 @@ class FileUploadView(APIView):
 
         if file_obj:  # 确保有文件被上传
             # 定义文件的保存路径
-            save_path = os.path.join('files', file_obj.name)
+            save_path = os.path.join(save_dir, file_obj.name)
             # 打开指定路径的文件以写入上传的文件内容
             with open(save_path, 'wb+') as destination:
                 for chunk in file_obj.chunks():

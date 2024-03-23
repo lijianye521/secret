@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
-
+import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -26,7 +26,9 @@ SECRET_KEY = "django-insecure-r4&-0wtp6+9h&1q2pbpf1unw&*4pl+=jx4r9^u%hdq_*1jvd=%
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
+#添加静态资源目录
+MEDIA_URL = '/images/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'prediction_service', 'model', 'model_performance_output')
 
 # Application definition
 
