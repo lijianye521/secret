@@ -13,6 +13,7 @@
     "aos": "^2.3.4",
     "axios": "^1.6.8",
     "bootstrap": "^5.3.3",
+    "papaparse": "^5.4.1",
     "popper.js": "^1.16.1",
     "vue": "^3.4.21",
     "vue-awesome-swiper": "^5.0.1",
