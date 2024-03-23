@@ -21,5 +21,14 @@ const uploadFile = async (formData, onUploadProgress) => {
     throw new Error('Error uploading file');
   }
 };
+const predictModel = async () => {
+  try {
+    const response = await api.post('/predictss/'); // 移除 data 参数
+    return response.data;
+  } catch (error) {
+    throw new Error(`Error during model prediction: ${error.response.data}`);
+  }
+};
 
-export { uploadFile };
+
+export { uploadFile ,predictModel};

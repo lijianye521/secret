@@ -21,4 +21,7 @@ urlpatterns = [
     path("polls/", include("polls.urls")),
     path("admin/", admin.site.urls),
     path('fileupload/', include('fileupload.urls')),
+    path('predictss/', include('prediction_service.urls')),
+
+
 ]
